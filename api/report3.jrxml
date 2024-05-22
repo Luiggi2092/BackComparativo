@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report3" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4ca66c4c-80cd-4ed8-bd65-7d699b0d282b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Heading" fontSize="14"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="New Dataset 1" uuid="b1c53740-39e8-45d1-9caf-696a51d79bd5">
+		<queryString>
+			<![CDATA[select i.Enlace as "CODIGO",o.Orden as "Orden",o.Concepto as "MAT",O.Elemento as "Elemento",o.Cantidad as "CANTPRE",o.PrecioUni AS "COSTOUNDPRE",ROUND(o.Cantidad * o.PrecioUni,4) as "SubTotalPRE",i.ImaCan as "CANTREAL",i.ImaPun as "COSTOUNDREAL",ROUND(i.ImaCan * i.ImaPun,4) as "SubtotalReal" from produccion.dbo.OrdTCosto o inner join almacenes.dbo.ItMovimientos i on o.OdtCod COLLATE Modern_Spanish_CI_AS=i.ImaSer COLLATE Modern_Spanish_CI_AS and o.Orden=i.ImaPro where OdtCod='502974' and Tipo='CODMAT' ORDER BY Orden ASC
+select i.Enlace as "CODIGO",o.Orden as "Orden",o.Concepto as "PLANCHAS",O.Elemento as "Elemento",o.Cantidad as "CANTPRE",o.PrecioUni AS "COSTOUNDPRE",ROUND(o.Cantidad * o.PrecioUni,4) as "SubTotalPRE",i.ImaCan as "CANTREAL",i.ImaPun as "COSTOUNDREAL",ROUND(i.ImaCan * i.ImaPun,4) as "SubtotalReal" from produccion.dbo.OrdTCosto o inner join almacenes.dbo.ItMovimientos i on o.OdtCod COLLATE Modern_Spanish_CI_AS=i.ImaSer COLLATE Modern_Spanish_CI_AS and o.Orden=i.ImaPro where OdtCod='502974' and Tipo='PLANCHAS' and Concepto <> '** PLANCHAS **' ORDER BY Orden ASC]]>
+		</queryString>
+		<field name="CODIGO" class="java.lang.String"/>
+		<field name="Orden" class="java.lang.Integer"/>
+		<field name="MAT" class="java.lang.String"/>
+		<field name="Elemento" class="java.lang.String"/>
+		<field name="CANTPRE" class="java.math.BigDecimal"/>
+		<field name="COSTOUNDPRE" class="java.math.BigDecimal"/>
+		<field name="SubTotalPRE" class="java.math.BigDecimal"/>
+		<field name="CANTREAL" class="java.lang.Double"/>
+		<field name="COSTOUNDREAL" class="java.lang.Double"/>
+		<field name="SubtotalReal" class="java.lang.Double"/>
+	</subDataset>
+	<parameter name="op" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select i.Enlace as "CODIGO",o.Orden as "Orden",o.Concepto as "MAT",O.Elemento as "Elemento",o.Cantidad as "CANTPRE"
+,o.PrecioUni AS "COSTOUNDPRE",ROUND(o.Cantidad * o.PrecioUni,4) as "SubTotalPRE",i.ImaCan as "CANTREAL",i.ImaPun as "COSTOUNDREAL",ROUND(i.ImaCan * i.ImaPun,4) as "SubtotalReal"
+from produccion.dbo.OrdTCosto o inner join almacenes.dbo.ItMovimientos i on o.OdtCod COLLATE Modern_Spanish_CI_AS=i.ImaSer
+COLLATE Modern_Spanish_CI_AS and o.Orden=i.ImaPro where OdtCod=$P{op} and Tipo in ('CODMAT','PLANCHAS','TINTA','BARNIZ','Actcod') ORDER BY Orden ASC]]>
+	</queryString>
+	<field name="CODIGO" class="java.lang.String"/>
+	<field name="Orden" class="java.lang.Integer"/>
+	<field name="MAT" class="java.lang.String"/>
+	<field name="Elemento" class="java.lang.String"/>
+	<field name="CANTPRE" class="java.math.BigDecimal"/>
+	<field name="COSTOUNDPRE" class="java.math.BigDecimal"/>
+	<field name="SubTotalPRE" class="java.math.BigDecimal"/>
+	<field name="CANTREAL" class="java.lang.Double"/>
+	<field name="COSTOUNDREAL" class="java.lang.Double"/>
+	<field name="SubtotalReal" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="229" y="26" width="126" height="20" uuid="ae6b0524-fb2e-4164-b1db-ffb47a768163"/>
+				<text><![CDATA[Presupuestado vs Real]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="20" uuid="9419595b-d3f7-41ae-92af-9e62e93c9b5c"/>
+				<text><![CDATA[MAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="2" width="79" height="20" uuid="444a6f79-e036-4928-a547-35d0e2bacfcf"/>
+				<text><![CDATA[Elemento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="255" y="2" width="100" height="20" uuid="60363838-37d8-4998-93f0-67649bff45f0"/>
+				<text><![CDATA[COSTOUNDPRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="2" width="100" height="20" uuid="b89948d3-52b4-445f-b6ba-b87e3a8bfd1f"/>
+				<text><![CDATA[COSTOUNDREAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="2" width="100" height="20" uuid="b4e41a09-c16d-4715-9432-cb71f4ca4cc8"/>
+				<text><![CDATA[CANTREAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="179" y="2" width="100" height="20" uuid="c64e40ef-888e-4b2e-af95-c2e27b6afe09"/>
+				<text><![CDATA[CANTPRE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="67" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="26a43029-20e1-40c0-8200-fc12bf5984ed"/>
+				<textFieldExpression><![CDATA[$F{MAT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="79" height="20" uuid="0d348dc2-3d55-41c9-9264-aeabae7af294"/>
+				<textFieldExpression><![CDATA[$F{Elemento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="179" y="0" width="76" height="20" uuid="cdabe1e3-cce4-4fbe-b7c1-4419cfe5d25c"/>
+				<textFieldExpression><![CDATA[$F{CANTPRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="255" y="0" width="100" height="20" uuid="072bad95-b64e-4b68-b485-21b42b31d419"/>
+				<textFieldExpression><![CDATA[$F{COSTOUNDPRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="355" y="0" width="100" height="20" uuid="708215d2-08a9-49f1-9948-a00274541ecc"/>
+				<textFieldExpression><![CDATA[$F{CANTREAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="63aaf331-91be-436a-9480-4c2bca175c31"/>
+				<textFieldExpression><![CDATA[$F{COSTOUNDREAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
