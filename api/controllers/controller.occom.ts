@@ -31,7 +31,7 @@ export const OCCOM = async(req:Request, res:Response) => {
            .input('Ioctot',sql.Float,Ioctot)
            .input('IocOp',sql.VarChar,IocOp)
            .query(`
-             INSERT INTO compras.dbo.ItOCompras (
+             INSERT INTO compraslum.dbo.ItOCompras (
                 Enlace,IocCod,IocTip,IocPro,IocUni,IocDes,IocCan,
                 IocPun,IocFac,IocProg,IocReal,IocEmpresa,IocClasific,
                 IocTipo,IocCanF,Ioctot,IocIgv,IocMin,IocMaq,IocReq,

@@ -20,7 +20,7 @@ console.log(req.body);
 
    const checkQuery = `
       SELECT COUNT(*) AS count
-      FROM almacenes.dbo.itmovimientos
+      FROM almaceneslum.dbo.itmovimientos
       where ImaSer= @ImaSer
     `
 
@@ -55,7 +55,7 @@ console.log(req.body);
                 .input('ImaPun',sql.Float,  item.ImaPun || 0.00)
                 .input('ImaSer', sql.VarChar, item.ImaSer)
                 .query(`
-                    INSERT INTO almacenes.dbo.itmovimientos (
+                    INSERT INTO almaceneslum.dbo.itmovimientos (
                         Enlace, ImaCod, ImaPro, ImaEnlace, ImaAnc, ImaLar, ImaSel, ImaTip,
                         ImaDoc, ImaAlm, ImaDes, ImaFec, ImaCan, ImaMon, ImaCam, ImaPun,
                         ImaCie, ImaCie1, ImaOc, ImaOp, ImaCCos, ImaSol, ImaCanF, ImaSolOp,
@@ -100,7 +100,7 @@ export const editItemMovOt = async(req:Request,res:Response) => {
 
     if(pool){
 
-        const query = `UPDATE almacenes.dbo.itmovimientos SET ImaCan=@cant,ImaPun=@pu,ImaSolOp=@fact WHERE Enlace=@id`;
+        const query = `UPDATE almaceneslum.dbo.itmovimientos SET ImaCan=@cant,ImaPun=@pu,ImaSolOp=@fact WHERE Enlace=@id`;
 
         const result = await pool.request()
         .input('cant', sql.Float,cant)
@@ -136,7 +136,7 @@ export const editItemService = async(req:Request,res:Response) => {
 
      if(pool){
         
-        const query = `update compras.dbo.ItOCompras SET IocReq=@fact where Enlace=@id`;
+        const query = `update compraslum.dbo.ItOCompras SET IocReq=@fact where Enlace=@id`;
         const result = await pool.request()
         .input('fact',sql.VarChar,fact)
         .input('id', sql.Char,id)

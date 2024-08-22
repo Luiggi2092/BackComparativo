@@ -1,10 +1,10 @@
 import sql from 'mssql';
 
 const dbSettings = {
-  user : "sa",
-  password : "Isograf2018",
-  server: "AFDSRV09",
-  database: "siograf",
+  user : "fvh",
+  password : "73037303",
+  server: "DATASERVUR",
+  database: "siograflum",
   options : {
     encrypt:false,
     trustServerCertificate: true,
